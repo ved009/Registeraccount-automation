@@ -1,0 +1,31 @@
+from selenium import webdriver
+import imaplib
+import email
+
+# Setup Selenium WebDriver
+driver = webdriver.Chrome('path_to_chromedriver')
+
+# Function to register an email
+def register_email(email_address):
+    driver.get('signup_page_url')
+    # Fill the email field, and submit form (simplified)
+    driver.find_element_by_id('email_field').send_keys(email_address)
+    driver.find_element_by_id('submit_button').click()
+    # Wait and retrieve OTP from Gmail
+    otp = retrieve_otp(email_address)
+    # Fill the OTP field and complete registration
+    driver.find_element_by_id('otp_field').send_keys(otp)
+    driver.find_element_by_id('verify_button').click()
+
+# Function to retrieve OTP from Gmail
+def retrieve_otp(email_address):
+    # Connect to Gmail, search for the OTP email, and parse it (highly simplified)
+    # This would involve using imaplib or Gmail API to fetch and parse the email
+    otp = '123456' # Placeholder for OTP extraction logic
+    return otp
+
+# List of emails to register
+email_list = ['email1@gmail.com', 'email2@gmail.com']
+
+for email in email_list:
+    register_email(email)
